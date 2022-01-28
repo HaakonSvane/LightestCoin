@@ -4,7 +4,7 @@
 Python script for determining a fake coin in a bunch of real coins using a balance scale with the least amount of weighings.
 
 ### Why?
-This algorithm simulates the best approach to solve the following puzzle:
+This algorithm simulates the best approach for solving the following puzzle:
 
 >Given _n_ coins where all but one is of the same weight, find the least amount of weighings needed to determine
 which of the coins is fake (lighter) using a balance scale.
@@ -32,9 +32,11 @@ The maximum number of weighings _W(n)_ is
 <div style="text-align: center;">
 <img src="https://latex.codecogs.com/png.image?\dpi{110}&space;W(n)&space;=\left&space;\lceil{log_3(n)}\right&space;\rceil,&space;n&space;\in&space;\mathbb{Z^&plus;}" title="W(n) =\left \lceil{log_3(n)}\right \rceil, n \in \mathbb{Z^+}" />
 </div>
+using this apporach.
 
 ### How does the algorithm work?
-The algorithm follows the same procedure as mentioned above in a recursive manner. Whenever it encounters a number of 
+The algorithm follows the same procedure as mentioned above in a recursive manner. It is similar to binary search in the
+sense that it divides and subdivides smaller and smaller chunks of searchable data. Whenever it encounters a number of 
 coins that 3 does not divide, it weighs the two largest stacks. The plot below shows the number of weighings 
 simulated for n = 1...100 as well as the theoretical maximum plotted as a red line.
 
@@ -42,12 +44,13 @@ simulated for n = 1...100 as well as the theoretical maximum plotted as a red li
 
 
 Note that the algorithm often performs better than the maximum for values close but above 3<sup>k</sup> where k is some
-positive integer. The reason for this is as follows:
+positive integer. The reason for this is best explained using an example:
 
 Assume that you have 10 coins. This satisfies the condition that n is close to and above 9 = 3<sup>2</sup>. Divide the 
 coins into 3 stacks as explained in the solution procedure. This yields two stacks of 4 and one of two. Assuming that 
 the fake coin is selected by random using a flat probability distribution, the probability of the fake coin being in the
 stack of 2 coins is 1/5. If this actually happens to be the case, the number of weighings left is only one, compared to
-two if the coin was located in one of the stacks containing four coins.
+two if the coin was located in one of the stacks containing four coins. This means that for n = 10, the worst case 
+number of weighings is 3, while the algorithm has a 1/5 chance of making it in two.
 
 
